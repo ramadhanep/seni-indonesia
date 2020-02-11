@@ -1,0 +1,81 @@
+/* TIMPA */
+
+.page-content{
+    position: relative;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+}
+.wave{
+    position: absolute;
+    bottom: -140px;
+    right: -140px;
+    width: 350px;
+    height: 350px;
+    z-index: 1;
+    border-radius: 100%;
+}
+.wave2{
+    position: absolute;
+    bottom: -100px;
+    left: -50px;
+    width: 250px;
+    height: 250px;
+    z-index: -1;
+    border-radius: 100%;
+}
+
+.c-logo-app{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 70px;
+    margin-bottom: 30px;
+}
+.c-logo-app img{
+    width: 100px;
+    height: 100px;
+}
+
+
+@media screen and (max-width: 413px){
+    .wave{
+        width: 300px;
+        height: 300px;
+        bottom: -160px;
+        right: -50px;
+    }
+    .wave2{
+        width: 200px;
+        height: 200px;
+        bottom: -60px;
+        left: -10px;
+    }
+}
+@media screen and (max-height: 641px){
+    .wave{
+        width: 250px;
+        height: 250px;
+        bottom: -150px;
+        right: -50px;
+    }
+    .wave2{
+        width: 200px;
+        height: 200px;
+        bottom: -100px;
+        left: -10px;
+    }
+    .c-logo-app{
+        margin-top: 20px;
+    }
+}
+@media screen and (min-width: 767px){
+    .wave{
+        display: none;
+    }
+    .wave2{
+        display: none;
+    }
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <title>Seni Indonesia</title>
+    <link
+        href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i|Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i,900,900i"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="styles/framework.css">
+    <link rel="stylesheet" type="text/css" href="styles/custom.css">
+    <link rel="stylesheet" type="text/css" href="styles/custom-login.css">
+    <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
+</head>
+
+<body class="theme-light" data-background="none" data-highlight="green2">
+    <div id="page">
+        <div id="page-preloader">
+            <div class="loader-main">
+                <div class="preload-spinner border-highlight"></div>
+            </div>
+        </div>
+        <div class="page-content bg-white">
+            <div class="wave bg-green2-dark"></div>
+            <div class="wave2 bg-green1-dark"></div>
+            <div class="content left-40 right-40">
+                <div class="c-logo-app">
+                    <img src="img/seni-indonesia-tr-color.png" alt="logo">
+                </div>
+                <h1 class="center-text uppercase ultrabold fa-3x">Data Diri</h1>
+                <p class="center-text font-11 under-heading bottom-30 color-highlight">
+                    Isi data diri singkat kamu untuk profil pribadi
+                </p> 
+                <div class="input-style has-icon input-style-1 input-required">
+                    <i class="input-icon fa fa-user font-11"></i>
+                    <span class="input-style-1-inactive">Nama Lengkap</span>
+                    <em>(required)</em>
+                    <input id="input-nama-lengkap" type="name" placeholder="Nama Lengkap">
+                </div>
+                <div class="input-style has-icon input-style-1 input-required">
+                    <span>Status</span>
+                    <em>(required)</em>
+                    <select id="input-status">
+                        <option value="">Status</option>
+                        <option value="Pelajar">Pelajar</option>
+                        <option value="Umum">Umum</option>
+                    </select>
+                </div>
+                <div class="clear"></div>
+                <a id="login-submit" href="#"
+                    class="button button-full button-m shadow-large button-round-small bg-green2-dark top-30 bottom-0">Masuk</a>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="toasts">
+            <div class="toast toast-top" id="toast-processing">
+                <p class="color-white"><i class='fa fa-sync fa-spin right-10'></i> Memproses... </p>
+                <div class="toast-bg opacity-95 bg-blue2-dark"></div>
+            </div>
+            <div class="toast toast-top" id="toast-error">
+                <p class="color-white"><i class='fa fa-times right-10'></i> Isi dengan benar! </p>
+                <div class="toast-bg opacity-95 bg-red2-dark"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script type="text/javascript" src="scripts/plugins.js"></script>
+    <script type="text/javascript" src="scripts/custom.js"></script>
+
+    <!-- CUSTOM -->
+    <script src="scripts/custom/toast.js"></script>
+    <script src="scripts/custom/loader.js"></script>
+
+    <script type="text/javascript" src="../cordova.js"></script>
+    <script>
+        document.addEventListener('deviceready', function () {
+            StatusBar.overlaysWebView(true);
+            StatusBar.styleDefault();
+            StatusBar.backgroundColorByHexString('#00FFFFFF');
+        })
+        var storage = window.localStorage;
+
+        var logged = storage.getItem('logged');
+
+        if (logged == "true") {
+            window.location = './index.html';
+        }
+        else {
+            $('#login-submit').click(function (e) {
+                e.preventDefault();
+                toastProcessing();
+
+                setTimeout(function () {
+                    toastProcessingHide();
+                    var nama_lengkap = $('#input-nama-lengkap').val();
+                    var status = $('#input-status').val();
+
+                    if (nama_lengkap == "" || status == "") {
+                        toastError();
+                    }
+                    else {
+                        storage.setItem('nama_lengkap', nama_lengkap);
+                        storage.setItem('status', status);
+                        storage.setItem('logged', 'true');
+                        storage.setItem('alertLogged', 'true');
+
+                        window.location = "index.html";
+                    }
+                }, 1000)
+            })
+        }
+    </script>
+</body>

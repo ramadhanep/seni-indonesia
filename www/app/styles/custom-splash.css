@@ -1,0 +1,81 @@
+#page{
+    height: 100%;
+    position: fixed;
+    background-image: linear-gradient(to bottom, #2ECC71 0, #2ABA66 100%);
+}
+
+.c-logo{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.c-logo .tr{
+    width: 120px;
+    height: 120px;
+}
+.c-logo .hr{
+    width: 280px;
+    height: 80px;
+}
+.c-logo .loader{
+    margin-top: 15px;
+    width: 50px;
+    height: 50px;
+}
+
+.c-logo-lomba{
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    bottom: 0;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    background-color: rgba(0,0,0,.3);
+}
+.c-logo-lomba .c-3{
+    width: calc(100%/3);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.c-logo-lomba .c-3 .lamk2019{
+    width: 60px;
+    height: 50px;
+}
+.c-logo-lomba .c-3 .simoki{
+    width: 40px;
+    height: 55px;
+}
+.c-logo-lomba .c-3 .tutwuri2018{
+    width: 55px;
+    height: 55px;
+}
+
+.wave{
+    position: absolute;
+    width: 100%;
+    height: 250px;
+    z-index: 2;
+    border-bottom-left-radius: 100%;
+    border-bottom-right-radius: 100%;
+    background-color: rgba(0,0,0,.08);
+}
+
+
+.loader-main{
+    background-color: rgba(0,0,0,0) !important;
+    position: relative;
+    height: 80px;
+}
+.preload-spinner{
+    top: 70%;
+    border-color: #f9f9f9;
+}

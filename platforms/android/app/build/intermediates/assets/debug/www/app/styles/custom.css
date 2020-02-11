@@ -1,0 +1,167 @@
+.c-bg-flat{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #2ABA66;
+    background-image: url(../img/bg-top/flat.png);
+    background-size: cover;
+    width: 100%;
+    height: 150px;
+}
+
+
+.c-img-box-menu{
+    width: 60px;
+    height: 60px;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 60px;
+    line-height: 60px;
+}
+.c-img-modal-top{
+    width: 80px;
+    height: 80px;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 60px;
+}
+.c-slider-trends{
+    width: 300px;
+    height: 240.76px;
+    object-fit: cover;
+}
+
+.c-select-light{
+    color: #fff !important;
+    border-bottom: solid 1px rgba(255,255,255,.8) !important;
+}
+
+.c-toast-show{
+    transform: translate(-50%, -0) !important;
+    opacity: 1 !important;
+}
+
+.c-button-wrapper{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.c-img-list{
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border: 1.5px solid #2ABA66;
+    padding: 0 !important;
+    border-radius: 50px;
+}
+.c-img-list-accordion{
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    border: 1.5px solid #2ABA66;
+    padding: 0 !important;
+    border-radius: 50px;
+    display: unset;
+    top: 5px;
+    margin-right: 5px;
+}
+.c-img-content-accordion{
+    width: 100%;
+    height: 150px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+#profile-image{
+    transition: .5s all;
+}
+.justify{
+    text-align: justify;
+}
+
+.d-flex{
+    display: flex;
+}
+.jc-center{
+    justify-content: center;
+}
+.jc-space-between{
+    justify-content: space-between;
+}
+.ai-center{
+    align-items: center;
+}
+
+.c-margin-left-160{
+    margin-left: 160px;
+}
+.c-margin-bottom-none{
+    margin-bottom: 0;
+}
+
+.question{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    font-size: 17px;
+}
+
+.answer{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-size: 17px;
+}
+
+.question-content{
+    display: none;
+}
+.question-content.active{
+    display: block;
+}
+
+.c-close-answer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 4;
+}
+.c-close-answer.active{
+    width: 100%;
+    height: 100%;
+}
+.c-border-color{
+    border: 1.5px solid #2ABA66;
+}
+
+/* TIMPA */
+
+.bg-18{
+    background-image: url(../img/kesenian/sumatera-barat/tari-piring.jpg);
+}
+.bg-18.seni-rupa{
+    background-image: url(../img/seni-rupa-murni/home.jpg);
+}
+.bg-18.rumah-adat{
+    background-image: url(../img/rumah-adat/riau/selaso-jatuh-kembar.jpg);
+}
+.bg-18.pakaian-adat{
+    background-image: url(../img/pakaian-adat/bengkulu/adat-bengkulu.jpg);
+}
+.bg-18.alat-musik{
+    background-image: url(../img/alat-musik/bangka-belitung/caklemong.jpg);
+}
+.bg-18.kuis{
+    background-image: url(../img/bg-top/quiz.jpg);
+}

@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <title>Seni Indonesia</title>
+    <link
+        href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i|Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i,900,900i"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../styles/style.css">
+    <link rel="stylesheet" type="text/css" href="../../styles/framework.css">
+    <link rel="stylesheet" type="text/css" href="../../styles/custom-score.css">
+    <link rel="stylesheet" type="text/css" href="../../fonts/css/fontawesome-all.min.css">
+</head>
+
+<body class="theme-light" data-background="none" data-highlight="green2">
+    <div id="page">
+        <div id="page-preloader">
+            <div class="loader-main">
+                <div class="preload-spinner border-highlight"></div>
+            </div>
+        </div>
+
+        <div class="page-content header-clear-small">
+            <div class="wave"></div>
+            <div data-height="150" class="top-70 caption caption-margins round-medium shadow-large" style="height: 150px;">
+                <div class="caption-center">
+                    <h1 class="center-text color-white bolder font-22">Kuis <span class="quiz_category"></span></h1>
+                    <p class="boxed-text-huge under-heading color-white opacity-90 bottom-0">
+                        Total skor kuis <span class="quiz_category"></span> sederhana kamu!
+                    </p>
+                </div>
+                <div class="caption-overlay bg-black opacity-60"></div>
+                <div class="caption-bg bg-18 seni-rupa"></div>
+            </div>
+            <div class="content">
+                <div class="rate">
+                    <i id="str1" class="fas fa-star"></i>
+                    <i id="str2" class="fas fa-star"></i>
+                    <i id="str3" class="fas fa-star"></i>
+                    <i id="str4" class="fas fa-star"></i>
+                    <i id="str5" class="fas fa-star"></i>
+                </div>
+            </div>
+            <div class="content-boxed score">
+                <div class="content center-text bottom-20">
+                    <div class="score_ bg-highlight bottom-20">
+                        <b class="sessionScore"></b>/100
+                    </div>
+                    <h1 class="bolder font-32"><span class="catScore"></span></h1>
+                    <p class="color-highlight under-heading font-12 bottom-0">Skor kamu <span class="catScore"></span> <span class="messageScore"></span></p>
+                    <p class="opacity-70 bottom-0 top-10">
+                        Selamat ya <span class="user_name"></span> kamu telah mendapatkan skor <span class="sessionScore"></span> untuk kuis <span class="quiz_category"></span>.
+                    </p>
+                    <a href="#" onclick="otherQuiz()" class="button button-s bg-highlight button-round-large shadow-huge top-20 button-full">Kuis
+                        Lainnya</a>
+                </div>
+            </div>
+            <div class="content">
+                <h4 class="text-center font-500">Kategori kuis : <span class="highlight bg-highlight br-30 quiz_category"></span></h4>
+            </div>
+        </div>
+        <div class="menu-hider"></div>
+    </div>
+    <script type="text/javascript" src="../../scripts/jquery.js"></script>
+    <script type="text/javascript" src="../../scripts/plugins.js"></script>
+    <script type="text/javascript" src="../../scripts/custom.js"></script>
+
+    <!-- CUSTOM -->
+    <script src="../../scripts/custom/check-session.js"></script>
+    <script src="../../scripts/custom/loader.js"></script>
+    <script type="text/javascript" src="../../../cordova.js"></script>
+    <script>
+        document.addEventListener("backbutton", function (e) {
+            e.preventDefault();
+        })
+        document.addEventListener('deviceready', function () {
+            StatusBar.overlaysWebView(true);
+            StatusBar.backgroundColorByHexString('#00FFFFFF');
+        })
+
+        var localStorage = window.localStorage;
+        function otherQuiz() {
+            localStorage.removeItem('score_quiz');
+            window.location = '../../kuis.html'
+        }
+
+        var score_end = localStorage.getItem('score_quiz');
+        var quiz_category = window.sessionStorage.getItem('quiz_category_hasil');
+        var user_name = localStorage.getItem('nama_lengkap');
+        localStorage.removeItem('score_quiz');
+
+        $('.quiz_category').text(quiz_category);
+        $('.user_name').text(user_name);
+
+        var audio_lose = new Audio('../../audio/lose.wav');
+        var audio_win = new Audio('../../audio/win.wav');
+
+        if (score_end == 0) {
+            audio_lose.play();
+            $('.sessionScore').text(score_end);
+            $('.catScore').text('Sangat Kurang');
+            $('.messageScore').text('belajar lagi ya!');
+        }
+        else if (score_end == 20) {
+            audio_lose.play();
+            $('.sessionScore').text(score_end);
+            $('.catScore').text('Sangat Kurang');
+            $('.messageScore').text('belajar lagi ya!');
+            $('#str1').addClass('on');
+        }
+        else if (score_end == 40) {
+            audio_lose.play();
+            $('.sessionScore').text(score_end);
+            $('.catScore').text('Kurang');
+            $('.messageScore').text('belajar lagi ya!');
+            $('#str1').addClass('on');
+            $('#str2').addClass('on');
+        }
+        else if (score_end == 60) {
+            audio_win.play();
+            $('.sessionScore').text(score_end);
+            $('.catScore').text('Cukup');
+            $('.messageScore').text('tingkatkan lagi ya!');
+            $('#str1').addClass('on');
+            $('#str2').addClass('on');
+            $('#str3').addClass('on');
+        }
+        else if (score_end == 80) {
+            audio_win.play();
+            $('.sessionScore').text(score_end);
+            $('.catScore').text('Baik');
+            $('.messageScore').text('pertahankan ya kalau bisa ditingkatkan!');
+            $('#str1').addClass('on');
+            $('#str2').addClass('on');
+            $('#str3').addClass('on');
+            $('#str4').addClass('on');
+        }
+        else if (score_end == 100) {
+            audio_win.play();
+            $('.sessionScore').text(score_end);
+            $('.catScore').text('Sangat Baik');
+            $('.messageScore').text('pertahankan skor kamu ya!');
+            $('#str1').addClass('on');
+            $('#str2').addClass('on');
+            $('#str3').addClass('on');
+            $('#str4').addClass('on');
+            $('#str5').addClass('on');
+        }
+    </script>
+</body>

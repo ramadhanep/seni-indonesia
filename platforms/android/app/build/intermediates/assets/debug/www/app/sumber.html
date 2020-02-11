@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <title>Seni Indonesia</title>
+    <link
+        href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i|Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i,900,900i"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="styles/framework.css">
+    <link rel="stylesheet" type="text/css" href="styles/custom.css">
+    <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
+</head>
+
+<body onload="onLoad()" class="theme-light" data-background="none" data-highlight="green2">
+    <div id="page">
+        <div id="page-preloader">
+            <div class="loader-main">
+                <div class="preload-spinner border-highlight"></div>
+            </div>
+        </div>
+        <div class="header header-fixed header-logo-center">
+            <a href="#" class="header-title">Sumber & Referensi</a>
+            <a href="#" class="back-button header-icon header-icon-1"><i
+                    class="fas fa-arrow-left"></i></a>
+        </div>
+        <div class="page-content header-clear-small top-45">
+            <div class="content-boxed">
+                <div class="content bottom-0">
+                    <h5 class="font-600">Sumber konten : </h5>
+                    <ul>
+                        <li>
+                            https://sahabatnesia.com/tari-tradisional-nusantara/
+                        </li>
+                        <li>
+                            https://ilmuseni.com/seni-rupa/contoh-karya-seni-rupa-dan-terapan
+                        </li>
+                        <li>
+                            https://www.romadecade.org/rumah-adat/
+                        </li>
+                        <li>
+                            https://ilmuseni.com/seni-pertunjukan/seni-musik/nama-alat-musik-tradisional
+                        </li>
+                        <li>
+                            https://kangapip.com/pakaian-adat-tradisional
+                        </li>
+                        <li>
+                            https://www.romadecade.org/pakaian-adat-indonesia/
+                        </li>
+                        <li>
+                            https://www.goodreads.com/quotes/tag/budaya
+                        </li>
+                        <li>
+                            https://www.goodreads.com/quotes/tag/kebudayaan
+                        </li>
+                        <li>
+                            https://www.goodreads.com/quotes/tag/seni
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-boxed">
+                <div class="content bottom-0">
+                    <h5 class="font-600">Sumber gambar & sound efek : </h5>
+                    <ul>
+                        <li>
+                            https://www.vectorstock.com/
+                        </li>
+                        <li>
+                            https://www.youtube.com/watch?v=worclOeTALw
+                        </li>
+                        <li>
+                            https://www.youtube.com/watch?v=w3MusaYw8aQ
+                        </li>
+                        <li>
+                            https://www.youtube.com/watch?v=_asNhzXq72w
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-hider"></div>
+    </div>
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script type="text/javascript" src="scripts/plugins.js"></script>
+    <script type="text/javascript" src="scripts/custom.js"></script>
+
+    <!-- CUSTOM -->
+    <script src="scripts/custom/check-session.js"></script>
+    <script src="scripts/custom/theme-session.js"></script>
+    <script type="text/javascript" src="../cordova.js"></script>
+
+    <script>
+        function onLoad() {
+            document.addEventListener("deviceready", onDeviceReady, false);
+            document.addEventListener("backbutton", onBackKeyDown, false);
+        }
+        function onDeviceReady() {
+            StatusBar.overlaysWebView(false);
+
+            var storage = window.localStorage;
+            if (storage.getItem('theme') != "dark") {
+                StatusBar.styleDefault();
+                StatusBar.backgroundColorByHexString('#FFFFFF');
+            }
+            else {
+                StatusBar.styleLightContent();
+                StatusBar.backgroundColorByHexString('#21252a');
+            }
+        }
+    </script>
+</body>

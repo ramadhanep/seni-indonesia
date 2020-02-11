@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <title>Seni Indonesia</title>
+    <link
+        href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i|Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i,900,900i"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="styles/framework.css">
+    <link rel="stylesheet" type="text/css" href="styles/custom.css">
+    <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
+</head>
+
+<body class="theme-light" data-background="none" data-highlight="green2">
+    <div id="page">
+        <div id="page-preloader">
+            <div class="loader-main">
+                <div class="preload-spinner border-highlight"></div>
+            </div>
+        </div>
+        <div class="header header-fixed header-logo-center">
+            <a href="#" class="header-title">Kuis</a>
+        </div>
+        <div id="footer-menu" class="footer-menu-5-icons footer-menu-style-1">
+            <a href="#" onclick="window.location='./index.html'"><i class="fas fa-home"></i><span>Home</span></a>
+            <a href="#" onclick="window.location='./quotes.html'"><i
+                    class="fas fa-quote-right"></i><span>Quotes</span></a>
+            <a href="#" class="active-nav"><i class="fas fa-tasks"></i><span>Kuis</span></a>
+            <a href="#" onclick="window.location='./profile.html'"><i
+                    class="far fa-user-circle"></i><span>Saya</span></a>
+            <a href="#" data-menu="menu-settings"><i class="fas fa-cog"></i><span>Pengaturan</span></a>
+            <div class="clear"></div>
+        </div>
+
+        <div class="page-content header-clear-small top-45">
+            <div id="dataQuestionsCategory">
+                
+            </div>
+        </div>
+
+
+        <div id="menu-settings" class="menu menu-box-bottom menu-box-detached round-large" data-menu-height="150"
+            data-menu-effect="menu-over">
+            <div class="content bottom-0">
+                <div class="menu-title">
+                    <h1>Pengaturan</h1>
+                    <p class="color-highlight">Pengaturan aplikasi</p><a href="#" class="close-menu"><i
+                            class="fa fa-times"></i></a>
+                </div>
+                <div class="divider bottom-20"></div>
+                <div class="toggle-with-icon">
+                    <i class="toggle-icon round-tiny fa fa-moon bg-dark2-dark color-white"></i>
+                    <a id="toggle-dark-theme" href="#" class="toggle-switch toggle-ios toggle-off" data-toggle-theme
+                        data-toggle-height="27" data-toggle-width="50" data-toggle-content="toggle-content-1"
+                        data-toggle-checkbox="toggle-checkbox-1" data-bg-on="bg-green2-dark" data-bg-off="">
+                        <span class="color-theme regularbold font-13">Mode Malam</span>
+                        <strong></strong>
+                        <u></u>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-hider"></div>
+    </div>
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script type="text/javascript" src="scripts/plugins.js"></script>
+    <script type="text/javascript" src="scripts/custom.js"></script>
+
+    <!-- CUSTOM -->
+    <script src="scripts/custom/check-session.js"></script>
+    <script src="scripts/custom/theme-session.js"></script>
+
+    <script type="text/javascript" src="../cordova.js"></script>
+
+    <script src="scripts/custom/db-questions.js"></script>
+    <script>
+        document.addEventListener('deviceready', function () {
+            StatusBar.overlaysWebView(false);
+
+            var storage = window.localStorage;
+            if (storage.getItem('theme') != "dark") {
+                StatusBar.styleDefault();
+                StatusBar.backgroundColorByHexString('#FFFFFF');
+            }
+            else {
+                StatusBar.styleLightContent();
+                StatusBar.backgroundColorByHexString('#21252a');
+            }
+
+            db = window.sqlitePlugin.openDatabase({
+                name: 'seni-indonesia.db',
+                location: 'default',
+            });
+
+            db.transaction(function (tx) {
+                tx.executeSql('SELECT * FROM questions GROUP BY category ORDER BY id', [], function (tx, rs) {
+                    for (var i = 0; i < rs.rows.length; i++) {
+                        $('#dataQuestionsCategory').append(`<div class="content">
+                            <div class="content content-box ` + (i % 2 == 1 ? `bg-gradient-blue2` : `bg-gradient-green2`) + ` round-small shadow-large">
+                                <h1 class="center-text color-white bolder top-20">`+ rs.rows.item(i)['category'] + `</h1>
+                                <p class="center-text color-white bottom-20">
+                                    Kuis `+ rs.rows.item(i)['category'] + ` sederhana
+                                </p>
+                                <a href="#" onclick="window.sessionStorage.setItem('quiz_category', '`+ rs.rows.item(i)['category'] + `'); window.location='pages/kuis/soal.html';" class="bottom-20 button button-center-small button-xs button-round-small bg-white color-black">Mulai Kuis</a>
+                            </div>
+                        </div>`);
+                    }
+                }, function (tx, error) {
+                    alert('SELECT error: ' + error.message);
+                });
+            });
+        })
+    </script>
+</body>

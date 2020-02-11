@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <title>Seni Indonesia</title>
+    <link
+        href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i|Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i,900,900i"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="styles/framework.css">
+    <link rel="stylesheet" type="text/css" href="styles/custom-app-intro.css">
+    <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
+</head>
+
+<body onload="onLoad()" class="theme-light" data-background="none" data-highlight="green2">
+    <div id="page" class="bg-gradient-blue2">
+        <div id="page-preloader">
+            <div class="loader-main">
+                <div class="preload-spinner border-highlight"></div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="c-page-content">
+                <div class="intro active">
+                    <div class="content">
+                        <h1 class="color-white text-center">Selamat datang di Seni Indonesia!</h1>
+                    </div>
+                    <div class="c-top">
+                        <div class="img-flat text-center">
+                            <img src="img/seni-indonesia-tr.png" alt="">
+                        </div>
+                    </div>
+                    <div class="c-top">
+                        <p class="color-white text-center" style="font-size: 16px;">Seni Indonesia adalah aplikasi pendidikan tentang kesenian yang ada di Indonesia, baik seni tradisional ataupun seni modern. Dibuat untuk ikut serta Lomba Mobile Kihajar 2019.</p>
+                    </div>
+                </div>
+                <div class="intro">
+                    <div class="content">
+                        <h1 class="color-white text-center">Tidak membutuhkan koneksi internet!</h1>
+                    </div>
+                    <div class="c-top">
+                        <div class="img-flat text-center">
+                            <img src="img/app-intro/offline.png" alt="">
+                        </div>
+                    </div>
+                    <div class="c-top">
+                        <p class="color-white text-center" style="font-size: 16px;">Seni Indonesia tidak menggunakan jaringan internet untuk dapat menggunakannya.</p>
+                    </div>
+                </div>
+                <div class="intro">
+                    <div class="content">
+                        <h1 class="color-white text-center">Berisi konten kesenian yang lengkap!</h1>
+                    </div>
+                    <div class="c-top">
+                        <div class="img-flat img-content text-center">
+                            <img src="img/app-intro/content.png" alt="">
+                        </div>
+                    </div>
+                    <div class="c-top">
+                        <p class="color-white text-center" style="font-size: 16px;">Konten kesenian di Seni Indonesia berasal dari internet yang telah dirangkum secara singkat agar mempermudah pengguna paham setelah selesai membaca.</p>
+                    </div>
+                </div>
+                <div class="intro">
+                    <div class="content">
+                        <h1 class="color-white text-center">Kuis Sederhana!</h1>
+                    </div>
+                    <div class="c-top">
+                        <div class="img-flat img-quiz text-center">
+                            <img src="img/app-intro/quiz.png" alt="">
+                        </div>
+                    </div>
+                    <div class="c-top">
+                        <p class="color-white text-center" style="font-size: 16px;">Dilengkapi kuis sederhana untuk membantu pengguna mempermudah mengingat akan kesenian yang ada di Indonesia.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="indicators">
+                <div>
+                    <a id="skipBtn" href="#" class="color-white action-btn">LEWATI</a>
+                </div>
+                <div class="bullet">
+                    <span class="span active"></span>
+                    <span class="span"></span>
+                    <span class="span"></span>
+                    <span class="span"></span>
+                </div>
+                <div>
+                    <a id="nextBtn" href="#" class="color-white action-btn"><i class="fas fa-chevron-right"></i></a>
+                    <a id="doneBtn" href="#" class="color-white action-btn">SELESAI</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script type="text/javascript" src="scripts/plugins.js"></script>
+    <script type="text/javascript" src="scripts/custom.js"></script>
+
+    <!-- CUSTOM -->
+
+    <script type="text/javascript" src="../cordova.js"></script>
+    <script>
+        function onLoad() {
+            document.addEventListener("backbutton", onBackKeyDown, false);
+            document.addEventListener("deviceready", onDeviceReady, false);
+        }
+        function onBackKeyDown() {
+            navigator.app.exitApp();
+        }
+        function onDeviceReady() {
+            StatusBar.overlaysWebView(true);
+            StatusBar.backgroundColorByHexString('#0027a75c');
+
+            var scroll_pos = 0;
+            $(document).scroll(function () {
+                scroll_pos = $(this).scrollTop();
+                if (scroll_pos > 5) {
+                    StatusBar.backgroundColorByHexString('#4D000000');
+                } else {
+                    StatusBar.backgroundColorByHexString('#0027a75c');
+                }
+            });
+        }
+        
+        var localStorage = window.localStorage;
+
+        var app_intro = localStorage.getItem('app_intro')
+        // if(app_intro == "done"){
+        //     window.location = 'index.html';
+        // }
+        // else{
+            $('#doneBtn').hide();
+            $('#nextBtn').click(function(e){
+                e.preventDefault()
+                var intro_active = $('.intro.active')
+                console.log(intro_active.is(':nth-last-child(1)'))
+                if(intro_active.is(':nth-last-child(1)')){
+                    $('#nextBtn').hide();
+                    $('#doneBtn').show();
+                }
+                else{
+                    intro_active.removeClass('active');
+                    intro_active.next().addClass('active');
+                    if(intro_active.next().is(':nth-last-child(1)')){
+                        $('#nextBtn').hide();
+                        $('#doneBtn').show();
+                    }
+                    var span_active = $('.span.active')
+                    span_active.removeClass('active');
+                    span_active.next().addClass('active');
+                    bgPage()
+                }
+            })
+            $('#doneBtn').click(function(e){
+                e.preventDefault();
+                localStorage.setItem('app_intro', 'done');
+                window.location = "index.html";
+            })
+            $('#skipBtn').click(function(e){
+                e.preventDefault();
+                localStorage.setItem('app_intro', 'done');
+                window.location = "index.html";
+            })
+            $('.span').click(function(e){
+                e.preventDefault();
+                if($(this).is(':nth-child(1)')){
+                    $('.span').removeClass('active');
+                    $(this).addClass('active');
+                    $('.intro').removeClass('active');
+                    $('.intro:nth-child(1)').addClass('active');
+                    $('#doneBtn').hide();
+                    $('#nextBtn').show();
+                    bgPage()
+                }
+                else if($(this).is(':nth-child(2)')){
+                    $('.span').removeClass('active');
+                    $(this).addClass('active');
+                    $('.intro').removeClass('active');
+                    $('.intro:nth-child(2)').addClass('active');
+                    $('#doneBtn').hide();
+                    $('#nextBtn').show();
+                    bgPage()
+                }
+                else if($(this).is(':nth-child(3)')){
+                    $('.span').removeClass('active');
+                    $(this).addClass('active');
+                    $('.intro').removeClass('active');
+                    $('.intro:nth-child(3)').addClass('active');
+                    $('#doneBtn').hide();
+                    $('#nextBtn').show();
+                    bgPage()
+                }
+                else if($(this).is(':nth-child(4)')){
+                    $('.span').removeClass('active');
+                    $(this).addClass('active');
+                    $('.intro').removeClass('active');
+                    $('.intro:nth-child(4)').addClass('active');
+                    $('#nextBtn').hide();
+                    $('#doneBtn').show();
+                    bgPage()
+                }
+            })
+            function bgPage(){
+                if($('.intro:nth-child(1)').hasClass('active')){
+                    setTimeout(function(){
+                        $('#page').removeClass()
+                        $('#page').addClass('bg-gradient-yellow2')
+                        
+                    }, 10)
+                }
+                else if($('.intro:nth-child(2)').hasClass('active')){
+                    setTimeout(function(){
+                        $('#page').removeClass()
+                        $('#page').addClass('bg-gradient-magenta2')
+                    }, 10)
+                }
+                else if($('.intro:nth-child(3)').hasClass('active')){
+                    setTimeout(function(){
+                        $('#page').removeClass()
+                        $('#page').addClass('bg-gradient-green2')
+                    }, 10)
+                }
+                else if($('.intro:nth-child(4)').hasClass('active')){
+                    setTimeout(function(){
+                        $('#page').removeClass()
+                        $('#page').addClass('bg-gradient-blue2')
+                    }, 10)
+                }
+            }
+            bgPage()
+        // }
+    </script>
+</body>

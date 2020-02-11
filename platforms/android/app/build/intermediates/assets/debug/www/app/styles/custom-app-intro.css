@@ -1,0 +1,159 @@
+#page{
+    position: absolute;
+    height: 100%;
+}
+.page-content{
+    height: 100%;
+}
+.c-page-content{
+    padding-top: 80px;
+}
+.img-flat{
+    margin: 150px 0;
+}
+.img-flat img{
+    width: 150px;
+    height: 150px;
+}
+.img-flat.img-content{
+    margin: 50px 0;
+}
+.img-flat.img-content img{
+    height: 250px;
+    width: 165px
+}
+.img-flat.img-quiz{
+    margin: 100px 0;
+}
+.img-flat.img-quiz img{
+    height: 200px;
+    width: 165px
+}
+
+.indicators{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 9;
+    padding: 0 45px;
+}
+.indicators div:nth-child(1){
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: calc(100%/3);
+}
+.indicators div:nth-child(2){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100%/3);
+}
+.indicators div:nth-child(3){
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: calc(100%/3);
+}
+
+.bullet{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bullet span{
+    margin: 0 5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,.4);
+}
+.bullet span.active{
+    background-color: #fff;
+}
+
+.action-btn{
+    font-size: 18px;
+}
+
+.intro{
+    display: none;
+}
+.intro.active{
+    display: block;
+}
+.c-top{
+    margin-top: 80px;
+}
+
+
+
+@media screen and (max-width: 413px){
+    .c-page-content{
+        padding-top: 100px;
+    }
+    .c-top{
+        padding: 0 5px;
+    }
+    .img-flat{
+        margin: 120px 0;
+    }
+    .img-flat img{
+        width: 120px;
+        height: 120px;
+    }
+    .action-btn{
+        font-size: 14px;
+    }
+    .img-flat.img-content{
+        margin: 0;
+    }
+    .img-flat.img-content img{
+        height: 140px;
+        width: 100px
+    }
+    .img-flat.img-quiz{
+        margin: 0;
+    }
+    .img-flat.img-quiz img{
+        height: 140px;
+        width: 110px
+    }
+}
+@media screen and (max-width: 361px){
+    .c-page-content{
+        padding-top: 80px;
+    }
+    .c-top{
+        padding: 0 5px;
+    }
+    .img-flat{
+        margin: 0;
+    }
+    .img-flat img{
+        width: 100px;
+        height: 100px;
+    }
+    .action-btn{
+        font-size: 14px;
+    }
+    .img-flat.img-content{
+        margin: 0;
+    }
+    .img-flat.img-content img{
+        height: 100px;
+        width: 75px
+    }
+    .img-flat.img-quiz{
+        margin: 0;
+    }
+    .img-flat.img-quiz img{
+        height: 100px;
+        width: 80px
+    }
+}

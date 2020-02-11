@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <title>Seni Indonesia</title>
+    <link
+        href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i|Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i,900,900i"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../styles/style.css">
+    <link rel="stylesheet" type="text/css" href="../../styles/framework.css">
+    <link rel="stylesheet" type="text/css" href="../../styles/custom.css">
+    <link rel="stylesheet" type="text/css" href="../../fonts/css/fontawesome-all.min.css">
+</head>
+
+<body class="theme-light" data-background="none" data-highlight="green2">
+    <div id="page">
+        <div id="page-preloader">
+            <div class="loader-main">
+                <div class="preload-spinner border-highlight"></div>
+            </div>
+        </div>
+        <div class="header header-fixed header-logo-center">
+            <a href="#" class="header-title">Rumah Adat</a>
+            <a href="#" class="back-button header-icon header-icon-1"><i class="fas fa-arrow-left"></i></a>
+        </div>
+        <div class="page-content header-clear-small top-45">
+            <div class="content">
+                <div data-height="180" class="caption caption-image caption-hide round-medium shadow-large">
+                    <div id="db_image"></div>
+                    <div class="caption-center left-20">
+                        <h1 class="color-white bolder top-10"><span class="db_rumah_adat"></span></h1>
+                        <p class="color-white under-heading bottom-10"><span class="db_daerah"></span></p>
+                        <p class="color-highlight under-heading bottom-10 font-12">(Tap untuk melihat gambar)</p>
+                    </div>
+                    <div class="caption-overlay bg-black opacity-70"></div>
+                </div>
+            </div>
+            <div class="content-boxed">
+                <div class="content" id="reading-progress-text">
+                    <h3 class="bolder"><span class="db_rumah_adat"></span></h3>
+                    <p>
+                        Berasal dari <strong class="color-highlight"><span class="db_daerah"></span></strong>
+                    </p>
+                    <div class="db_konten"></div>
+                </div>
+            </div>
+            <div class="content">
+                <a href="#"
+                    class="back-to-top button button-full button-xs button-round-large shadow-large bg-highlight">
+                    Kembali ke atas</a>
+            </div>
+        </div>
+
+        <div class="menu-hider"></div>
+    </div>
+    <script type="text/javascript" src="../../scripts/jquery.js"></script>
+    <script type="text/javascript" src="../../scripts/plugins.js"></script>
+    <script type="text/javascript" src="../../scripts/custom.js"></script>
+
+    <!-- CUSTOM -->
+    <script src="../../scripts/custom/check-session.js"></script>
+    <script src="../../scripts/custom/theme-session.js"></script>
+    <script src="../../scripts/custom/loader.js"></script>
+    <script src="../../scripts/custom/read-article.js"></script>
+    <script type="text/javascript" src="../../../cordova.js"></script>
+    <script>
+        var db = null;
+        var image = window.sessionStorage.getItem('id_rumah_adat').split(' ')[1];
+    
+        document.addEventListener('deviceready', function() {
+            StatusBar.overlaysWebView(false);
+
+            var storage = window.localStorage;
+            if(storage.getItem('theme') != "dark"){   
+                StatusBar.styleDefault();
+                StatusBar.backgroundColorByHexString('#FFFFFF');
+            }
+            else{
+                StatusBar.styleLightContent();
+                StatusBar.backgroundColorByHexString('#21252a');
+            }
+            db = window.sqlitePlugin.openDatabase({
+                name: 'seni-indonesia.db',
+                location: 'default',
+            });
+
+            db.transaction(function(tx) {
+                var id_rumah_adat = window.sessionStorage.getItem('id_rumah_adat').split(' ')[0];
+                tx.executeSql('SELECT * FROM rumah_adat WHERE id=?', [id_rumah_adat], function(tx, rs) {
+                    $('.db_rumah_adat').html(rs.rows.item(0)['rumah_adat']);
+                    $('.db_daerah').html(rs.rows.item(0)['daerah']);
+                    $('.db_konten').html(rs.rows.item(0)['konten']);
+                    image = rs.rows.item(0)['image'];
+                }, function(tx, error) {
+                    alert('SELECT error: ' + error.message);
+                });
+            });
+        });
+        $('#db_image').html(`<img src="../../images/empty.png" data-src="`+image+`" class="preload-image responsive-image">`);
+    </script>
+</body>

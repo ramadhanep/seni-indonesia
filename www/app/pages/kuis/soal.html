@@ -1,0 +1,256 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <title>Seni Indonesia</title>
+    <link
+        href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i|Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i,900,900i"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../styles/style.css">
+    <link rel="stylesheet" type="text/css" href="../../styles/framework.css">
+    <link rel="stylesheet" type="text/css" href="../../styles/custom.css">
+    <link rel="stylesheet" type="text/css" href="../../styles/custom-soal.css">
+    <link rel="stylesheet" type="text/css" href="../../fonts/css/fontawesome-all.min.css">
+</head>
+
+<body class="theme-light" data-background="none" data-highlight="green2">
+    <div id="page">
+        <div id="page-preloader">
+            <div class="loader-main">
+                <div class="preload-spinner border-highlight"></div>
+            </div>
+        </div>
+        <div class="header header-fixed header-logo-center">
+            <a href="#" class="header-title">Kuis Sederhana</a>
+        </div>
+
+        <div class="wave"></div>
+        <div class="page-content header-clear-small top-45">
+            <div class="content d-flex jc-center ai-center top-20">
+                <div class="number-question d-flex jc-center ai-center">
+                    <h1 id="numberOfQuestion" class="font-700">1</h1>
+                </div>
+            </div>
+            <div id="dataQuestions" class="content">
+            </div>
+            <div class="content top-50">
+                <a href="#" id="nextBtn"
+                    class="button button-full button-xs button-round-large shadow-large bg-highlight">
+                    Selanjutnya</a>
+                <a href="#" id="endBtn"
+                    class="button button-full button-xs button-round-large shadow-large bg-highlight">
+                    Selesai</a>
+
+                <a href="#" data-menu="back-choosee" id="backbutton"></a>
+            </div>
+        </div>
+
+        <div class="toasts">
+            <div class="toast toast-bottom" id="toast-primary">
+                <p class="color-white"><i class='fa fa-check right-10'></i>Jawaban benar!</p>
+                <div class="toast-bg opacity-95 bg-blue2-dark"></div>
+            </div>
+            <div class="toast toast-bottom" id="toast-error">
+                <p class="color-white"><i class='fa fa-times right-10'></i>Jawaban salah!</p>
+                <div class="toast-bg opacity-95 bg-red2-dark"></div>
+            </div>
+        </div>
+        <div id="back-choosee" class="menu menu-box-bottom menu-box-detached round-small" data-menu-height="230"
+            data-menu-effect="menu-over" data-menu-select="page-components">
+
+            <div class="top-30 boxed-text-huge">
+                <h1 class="center-text uppercase ultrabold top-20">Keluar Kuis</h1>
+                <p class="center-text-huge">
+                    Jawaban pada kuis yang sudah Anda jawab akan hilang, Ingin melanjutkan?
+                </p>
+
+                <div class="d-flex jc-center content left-50 right-50">
+                    <a href="#"
+                        class="close-menu button button-s button-round-medium shadow-large bg-highlight">Batal</a>
+                    &nbsp;
+                    <a href="#" class="button button-s button-round-medium shadow-large bg-red2-dark"
+                        onclick="back()">Konfirmasi</a>
+                </div>
+            </div>
+        </div>
+        <div class="menu-hider"></div>
+    </div>
+    <script type="text/javascript" src="../../scripts/jquery.js"></script>
+    <script type="text/javascript" src="../../scripts/plugins.js"></script>
+    <script type="text/javascript" src="../../scripts/custom.js"></script>
+
+    <!-- CUSTOM -->
+    <script src="../../scripts/custom/check-session.js"></script>
+    <script src="../../scripts/custom/loader.js"></script>
+    <script type="text/javascript" src="../../../cordova.js"></script>
+    <script>
+        var storage = window.localStorage;
+
+        var quiz_category = window.sessionStorage.getItem('quiz_category');
+        $('#quiz_category').text(quiz_category);
+        localStorage.removeItem('score_quiz');
+        function back() {
+            localStorage.removeItem('score_quiz');
+            window.location = '../../kuis.html';
+        }
+        document.addEventListener("backbutton", function () {
+            $('#backbutton').click();
+        })
+        document.addEventListener('deviceready', function () {
+            StatusBar.overlaysWebView(false);
+
+            var storage = window.localStorage;
+
+            StatusBar.styleDefault();
+            StatusBar.backgroundColorByHexString('#FFFFFF');
+
+            db = window.sqlitePlugin.openDatabase({
+                name: 'seni-indonesia.db',
+                location: 'default',
+            });
+
+            db.transaction(function (tx) {
+                tx.executeSql('SELECT * FROM questions WHERE category=? ORDER BY RANDOM()', [quiz_category], function (tx, rs) {
+                    for (var i = 0; i < rs.rows.length; i++) {
+                        if (i == 0) {
+                            $('#dataQuestions').append(`<div class="question-content active">
+                                <div class="question">
+                                    `+ rs.rows.item(i)["question"] + `
+                                </div>
+                                <div class="top-25 bottom-25 divider bg-dark2-dark opacity-50"></div>
+                                <div class="c-close-answer"></div>
+                                <div __answer="`+ rs.rows.item(i)["a"] + `" class="answer ` + (rs.rows.item(i)["a"] == rs.rows.item(i)["answer"] ? `true` : ``) + `">
+                                    `+ rs.rows.item(i)["a"] + `
+                                </div>
+                                <div __answer="`+ rs.rows.item(i)["b"] + `" class="answer ` + (rs.rows.item(i)["b"] == rs.rows.item(i)["answer"] ? `true` : ``) + `">
+                                    `+ rs.rows.item(i)["b"] + `
+                                </div>
+                                <div __answer="`+ rs.rows.item(i)["c"] + `" class="answer ` + (rs.rows.item(i)["c"] == rs.rows.item(i)["answer"] ? `true` : ``) + `">
+                                    `+ rs.rows.item(i)["c"] + `
+                                </div>
+                                <div __answer="`+ rs.rows.item(i)["d"] + `" class="answer ` + (rs.rows.item(i)["d"] == rs.rows.item(i)["answer"] ? `true` : ``) + `">
+                                    `+ rs.rows.item(i)["d"] + `
+                                </div>
+                            </div>`);
+                        }
+                        else {
+                            $('#dataQuestions').append(`<div class="question-content">
+                                <div class="question">
+                                    `+ rs.rows.item(i)["question"] + `
+                                </div>
+                                <div class="top-25 bottom-25 divider bg-dark2-dark opacity-50"></div>
+                                <div class="c-close-answer"></div>
+                                <div __answer="`+ rs.rows.item(i)["a"] + `" class="answer ` + (rs.rows.item(i)["a"] == rs.rows.item(i)["answer"] ? `true` : ``) + `">
+                                    `+ rs.rows.item(i)["a"] + `
+                                </div>
+                                <div __answer="`+ rs.rows.item(i)["b"] + `" class="answer ` + (rs.rows.item(i)["b"] == rs.rows.item(i)["answer"] ? `true` : ``) + `">
+                                    `+ rs.rows.item(i)["b"] + `
+                                </div>
+                                <div __answer="`+ rs.rows.item(i)["c"] + `" class="answer ` + (rs.rows.item(i)["c"] == rs.rows.item(i)["answer"] ? `true` : ``) + `">
+                                    `+ rs.rows.item(i)["c"] + `
+                                </div>
+                                <div __answer="`+ rs.rows.item(i)["d"] + `" class="answer ` + (rs.rows.item(i)["d"] == rs.rows.item(i)["answer"] ? `true` : ``) + `">
+                                    `+ rs.rows.item(i)["d"] + `
+                                </div>
+                            </div>`);
+                        }
+                    }
+
+                    var localStorage = window.localStorage;
+                    $('#endBtn').hide();
+                    $('#nextBtn').hide();
+                    $('#nextBtn').click(function (e) {
+                        e.preventDefault();
+                        var question_active = $('.question-content.active')
+                        console.log(question_active.is(':last-child'))
+                        var numberOfQuestion = $('#numberOfQuestion').text();
+
+                        if (question_active.is(':last-child')) {
+                            $('#nextBtn').hide();
+                            $('#endBtn').show();
+                        }
+                        else {
+                            $('#numberOfQuestion').text(Number(numberOfQuestion) + 1)
+                            question_active.removeClass('active')
+                            question_active.next().addClass('active')
+                            $('#nextBtn').hide()
+                            $('.answer').removeClass('bg-red2-dark')
+                            $('.answer').removeClass('color-white')
+                            $('.answer.true').removeClass('bg-green2-dark')
+                            $('.answer.true').removeClass('color-white')
+                            $('#toast-error').removeClass('c-toast-show')
+                            $('#toast-primary').removeClass('c-toast-show')
+                            $('.c-close-answer').removeClass('active')
+                        }
+                    })
+                    $('#endBtn').click(function (e) {
+                        e.preventDefault()
+                        var score_end = localStorage.getItem('score_quiz');
+                        var quiz_category_hasil = window.sessionStorage.setItem('quiz_category_hasil', quiz_category);
+                        window.location = "./nilai.html";
+                    })
+                    $('.answer').click(function (e) {
+                        e.preventDefault()
+                        if ($(this).hasClass('true')) {
+                            $('.answer').removeClass('bg-green2-dark')
+                            $('.answer').removeClass('color-white')
+                            $(this).addClass('bg-green2-dark')
+                            $(this).addClass('color-white')
+                            $('#toast-primary').addClass('c-toast-show')
+                            var audio_true = new Audio('../../audio/true.wav');
+                            audio_true.play();
+
+                            if (localStorage.getItem('score_quiz') != "") {
+                                var score_ = Number(localStorage.getItem('score_quiz')) + 20;
+                                localStorage.setItem('score_quiz', score_);
+                            }
+                            else {
+                                var score__ = 20;
+                                localStorage.setItem('score_quiz', score__);
+                            }
+                        }
+                        else {
+                            $('.answer').removeClass('bg-red2-dark')
+                            $('.answer').removeClass('color-white')
+                            $(this).addClass('bg-red2-dark')
+                            $(this).addClass('color-white')
+
+                            $('.answer.true').removeClass('bg-green2-dark')
+                            $('.answer.true').removeClass('color-white')
+                            $('.answer.true').addClass('bg-green2-dark')
+                            $('.answer.true').addClass('color-white')
+                            $('#toast-error').addClass('c-toast-show')
+                            var audio_false = new Audio('../../audio/false.wav');
+                            audio_false.play();
+
+                            if (localStorage.getItem('score_quiz') != "") {
+                                var score_ = Number(localStorage.getItem('score_quiz')) + 0;
+                                localStorage.setItem('score_quiz', score_);
+                            }
+                            else {
+                                var score__ = 0;
+                                localStorage.setItem('score_quiz', score__);
+                            }
+                        }
+                        var answer = $(this).attr('__answer')
+                        $('.c-close-answer').addClass('active')
+                        if($('.question-content.active').is(':last-child')){
+                            $('#endBtn').show();
+                        }
+                        else{
+                            $('#nextBtn').show()
+                        }
+                    })
+                }, function (tx, error) {
+                    alert('SELECT error: ' + error.message);
+                });
+            })
+        })
+    </script>
+</body>

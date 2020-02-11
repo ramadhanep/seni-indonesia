@@ -1,0 +1,24 @@
+.number-question{
+    background-color: #2ABA66;
+    padding: 10px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    color: #fff;
+}
+.number-question h1{
+    margin: 0;
+}
+.wave{
+    width: 800px;
+    position: fixed;
+    bottom: -100px;
+    left: -100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,.1);
+    border-top-left-radius: 500%;
+    z-index: -1;
+    height: 300px;
+}

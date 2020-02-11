@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <title>Seni Indonesia</title>
+    <link
+        href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i|Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i,900,900i"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="app/styles/style.css">
+    <link rel="stylesheet" type="text/css" href="app/styles/framework.css">
+    <link rel="stylesheet" type="text/css" href="app/styles/custom-splash.css">
+    <link rel="stylesheet" type="text/css" href="app/fonts/css/fontawesome-all.min.css">
+</head>
+
+<body onload="onLoad()" class="theme-light" data-background="none" data-highlight="green2">
+    <div id="page">
+        <div class="c-logo">
+            <img class="tr" src="app/img/seni-indonesia-tr.png" alt="seni-indonesia">
+            <img class="hr" src="app/img/seni-indonesia-hr.png" alt="seni-indonesia">
+        </div>
+        <div class="c-logo-lomba">
+            <div class="c-3">
+                <img class="simoki" src="app/img/splash/Si-Moki.png" alt="simoki">
+            </div>
+            <div class="c-3">
+                <img class="tutwuri2018" src="app/img/splash/TutWuri2018.png" alt="TutWuri2018">
+            </div>
+            <div class="c-3">
+                <img class="lamk2019" src="app/img/splash/LAMK2019.png" alt="lamk2019">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="app/scripts/jquery.js"></script>
+    <script type="text/javascript" src="app/scripts/plugins.js"></script>
+    <script type="text/javascript" src="app/scripts/custom.js"></script>
+
+    <script>
+        var storage = window.localStorage;
+
+        var logged = storage.getItem('logged');
+        var app_intro = localStorage.getItem('app_intro')
+
+        if(logged == "true"){
+            setTimeout(function(){
+                if(app_intro == "done"){
+                    window.location = "app/index.html"; 
+                }
+                else{
+                    window.location = "app/app-intro.html";
+                }
+            }, 4000);
+        }
+        else{
+            setTimeout(function(){
+                if(app_intro == "done"){
+                    window.location = "app/login.html";
+                }
+                else{
+                    window.location = "app/app-intro.html";
+                }
+            }, 4000);
+        }
+    </script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script>
+        function onLoad() {
+            document.addEventListener("backbutton", onBackKeyDown, false);  
+            document.addEventListener("deviceready", onDeviceReady, false);
+        }
+        function onBackKeyDown(){
+            navigator.app.exitApp();
+        }
+        function onDeviceReady() {
+            StatusBar.overlaysWebView(true);
+            StatusBar.backgroundColorByHexString('#00000000');
+        }
+    </script>
+</body>
