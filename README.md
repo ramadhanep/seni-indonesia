@@ -7,7 +7,7 @@
 
 ### Download APK File
 
-<a><img width="40" src="https://png.pngtree.com/png-vector/20190406/ourlarge/pngtree-apk-file-document-icon-png-image_917439.jpg" /></a>
+<a href="https://www.youtube.com/watch?v=vh422u6T-PY"><img width="40" src="https://png.pngtree.com/png-vector/20190406/ourlarge/pngtree-apk-file-document-icon-png-image_917439.jpg" /></a>
 
 ### Cordova Setup
 
