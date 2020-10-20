@@ -1,9 +1,15 @@
 # Seni Indonesia
-> Aplikasi Seni Indonesia - LAMK 2019 (Lomba Aplikasi Mobile Kihajar 2019) - Kemendikbud
+### Aplikasi Seni Indonesia - LAMK 2019 (Lomba Aplikasi Mobile Kihajar 2019) - Kemendikbud
 
 ![](https://live.staticflickr.com/65535/50108729843_54c045e3bb_c.jpg)
 
 ## Installation
+
+### Download APK File
+
+<a><img width="40" src="https://png.pngtree.com/png-vector/20190406/ourlarge/pngtree-apk-file-document-icon-png-image_917439.jpg" /></a>
+
+### Cordova Setup
 
 In your command-line on Windows:
 
